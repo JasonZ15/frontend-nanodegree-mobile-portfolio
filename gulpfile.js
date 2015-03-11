@@ -8,6 +8,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     path = require('path'),
     minifyCSS = require('gulp-minify-css'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
     ngrok = require('ngrok');
 
 var env,
@@ -81,18 +83,33 @@ gulp.task('html', function() { //called by initial build and also by watch
 
 // Compress and move css, js and images from development to production
 gulp.task('move', function() {
+  //css files
   gulp.src('builds/development/**/*.css')
   .pipe(gulpif(env === 'production', minifyCSS()))
   .pipe(gulpif(env === 'production', gulp.dest(outputDir)));
 
+  //js files
   gulp.src('builds/development/**/*.js')
   .pipe(gulpif(env === 'production', uglify()))
   .pipe(gulpif(env === 'production', gulp.dest(outputDir)));
 
+  //image files
   gulp.src('builds/development/img/**/*.*')
+  .pipe(gulpif(env === 'production', imagemin({
+    progressive: true,
+    svgoPlugins: [{removeViewBox: false}],
+    use: [pngquant()]
+  })))
   .pipe(gulpif(env === 'production', gulp.dest(outputDir+'img')));
+
   gulp.src('builds/development/views/images/**/*.*')
+  .pipe(gulpif(env === 'production', imagemin({
+    progressive: true,
+    svgoPlugins: [{removeViewBox: false}],
+    use: [pngquant()]
+  })))
   .pipe(gulpif(env === 'production', gulp.dest(outputDir+'views/images')));
+
   gulp.src('builds/development/*.ico')
   .pipe(gulpif(env === 'production', gulp.dest(outputDir)));
 });
