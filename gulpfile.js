@@ -5,9 +5,10 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     minifyHTML = require('gulp-minify-html'),
-    concat = require('gulp-concat');
-    path = require('path');
-    minifyCSS = require('gulp-minify-css');
+    concat = require('gulp-concat'),
+    path = require('path'),
+    minifyCSS = require('gulp-minify-css'),
+    ngrok = require('ngrok');
 
 var env,
     jsSources,
@@ -66,7 +67,8 @@ gulp.task('watch', function() {
 gulp.task('connect', function() {
   connect.server({
     root: outputDir,
-    livereload: true
+    livereload: true,
+    port: 8888
   });
 });
 
@@ -95,4 +97,13 @@ gulp.task('move', function() {
   .pipe(gulpif(env === 'production', gulp.dest(outputDir)));
 });
 
-gulp.task('default', ['watch', 'html', 'js', 'compass', 'move', 'connect']);
+//create ngrok url for testing
+gulp.task('ngrok-url', function(cb) {
+ return ngrok.connect(8888, function (err, url) {
+  site = url;
+  console.log('serving your tunnel from: ' + site);
+  cb();
+ });
+});
+
+gulp.task('default', ['watch', 'html', 'js', 'compass', 'move', 'connect', 'ngrok-url']);
