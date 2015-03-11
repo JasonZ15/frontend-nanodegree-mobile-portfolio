@@ -38,7 +38,7 @@ gulp.task('js', function() { //called by initial build and also by watch
     .pipe(concat('script.js'))
     .on('error', gutil.log)
     .pipe(gulpif(env === 'production', uglify()))
-    .pipe(gulp.dest(outputDir + 'js'))
+    .pipe(gulp.dest('builds/development/' + 'js'))
     .pipe(connect.reload());
 });
 
@@ -47,8 +47,8 @@ gulp.task('compass', function() { //called by initial build and also by watch
     .pipe(compass({
       sourcemap: cssMap,
       sass: 'components/sass',
-      css: outputDir + 'css',
-      image: outputDir + 'images',
+      css: 'builds/development/' + 'css',
+      image: 'builds/development/' + 'images',
       style: sassStyle,
       require: ['susy', 'breakpoint']
     })
