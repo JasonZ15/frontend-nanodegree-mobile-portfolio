@@ -61,7 +61,7 @@ gulp.task('compass', function() { //called by initial build and also by watch
 gulp.task('watch', function() {
   gulp.watch(jsSources, ['js']);
   gulp.watch(['components/sass/*.scss', 'components/sass/*/*.scss'], ['compass']);
-  gulp.watch('builds/development/**/*.html', ['html']);
+  gulp.watch(['builds/development/**/*.css', 'builds/development/**/*.js', 'builds/development/**/*.html'], ['html']);
 });
 
 gulp.task('connect', function() {
