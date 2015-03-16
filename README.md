@@ -27,5 +27,7 @@ gulp will create production ready files under builds/production
 
 #### Project Page (production code)
 check out branch gh-pages
+
 www.jasonzhai.me/frontend-nanodegree-mobile-portfolio
+
 www.jasonzhai.me/frontend-nanodegree-mobile-portfolio/views/pizza.html
