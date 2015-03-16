@@ -25,7 +25,7 @@ test the project at http://localhost:8888 or public URL ngrok gulp automatically
   ```
 gulp will create production ready files under builds/production
 
-#### Project Page (production code)
+### Project Page (production code)
 check out branch gh-pages
 
 www.jasonzhai.me/frontend-nanodegree-mobile-portfolio
