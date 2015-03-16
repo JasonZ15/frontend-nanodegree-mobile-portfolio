@@ -527,7 +527,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  // For a large display of 1900 x 5725, there are 28 pizzas visible on the screen. so limit animated pizzas to a total of 30.
+  for (var i = 0; i < 30; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
