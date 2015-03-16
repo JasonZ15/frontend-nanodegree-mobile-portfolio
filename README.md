@@ -13,16 +13,19 @@ www.jasonzhai.me/frontend-nanodegree-mobile-portfolio
 
 www.jasonzhai.me/frontend-nanodegree-mobile-portfolio/views/pizza.html
 
-1. reduce scripting
+#### reduce scripting
+
 - optimize calculating variables inside the For loops
 - limit number of animated pizzas to 30
 - put all animated pizzas into an array. no need to querySelect them every time.
 
-2. reduce the paint time
-  
+
+#### reduce the paint time
+
+in the CSS for the "mover" class.  
   ``` bash
   transform: translateZ(0);
   transform: translate3d(0,0,0);
   ```
-  to force elements into their own composite layer. the browser will only repaint the pixels that are affected by the moving pizza.
+to force elements into their own composite layer. the browser will only repaint the pixels that are affected by the moving pizza.
   
