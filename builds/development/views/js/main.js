@@ -402,6 +402,9 @@ var pizzaElementGenerator = function(i) {
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
 
+  // select pizza containers with getElementbyClassName and put them into an array. It's faster than querySelect.
+  var myPizzaContainers = document.getElementsByClassName('randomPizzaContainer');
+
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
     switch(size) {
@@ -450,10 +453,12 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    // newwidth is same value through out the while iterating. so they need to be outside of the loop to avoid repetition of calculating.
+    var dx = determineDx(myPizzaContainers[0], size);
+    var newwidth = (myPizzaContainers[0].offsetWidth + dx) + 'px';
+
+    for (var i = 0; i < myPizzaContainers.length; i++) {
+      myPizzaContainers[i].style.width = newwidth;
     }
   }
 
