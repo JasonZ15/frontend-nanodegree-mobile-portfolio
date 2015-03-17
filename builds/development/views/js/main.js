@@ -417,6 +417,9 @@ var resizePizzas = function(size) {
       case "3":
         document.querySelector("#pizzaSize").innerHTML = "Large";
         return;
+      case "4":
+        document.querySelector("#pizzaSize").innerHTML = "Extra Large";
+        return;
       default:
         console.log("bug in changeSliderLabel");
     }
@@ -432,17 +435,13 @@ var resizePizzas = function(size) {
 
     // TODO: change to 3 sizes? no more xl?
     // Changes the slider value to a percent width
+    // Change sizeSlider input attribute values to have however many size options as possible
     function sizeSwitcher (size) {
-      switch(size) {
-        case "1":
-          return 0.25;
-        case "2":
-          return 0.3333;
-        case "3":
-          return 0.5;
-        default:
-          console.log("bug in sizeSwitcher");
-      }
+      var switcher = document.getElementById('sizeSlider');
+      var max = switcher.getAttribute("max");
+      var min = switcher.getAttribute("min");
+      var step = switcher.getAttribute("step");
+      return 1 / ((max - size - min)/step + 2);
     }
 
     var newsize = sizeSwitcher(size);
